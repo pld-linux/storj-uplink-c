@@ -1,0 +1,30 @@
+--- uplink-c-1.2.0/Makefile.orig	2020-12-04 17:39:34.000000000 +0100
++++ uplink-c-1.2.0/Makefile	2020-12-12 15:20:02.404070490 +0100
+@@ -2,7 +2,9 @@
+ 
+ SHELL ?= bash
+ 
+-DESTDIR ?= /usr/local
++DESTDIR ?=
++PREFIX ?= /usr/local
++LIBDIR ?= $(PREFIX)/lib
+ GPL2 ?= false
+ 
+ ifeq (${GPL2},true)
+@@ -62,10 +64,9 @@
+ .PHONY: install
+ install: build ## install library and headers
+ 	install -d \
+-		${DESTDIR}/include/uplink \
+-		${DESTDIR}/lib \
+-		${DESTDIR}/lib/pkgconfig
+-	install .build/libuplink.so ${DESTDIR}/lib
+-	install .build/libuplink.a ${DESTDIR}/lib
+-	install -m 644 .build/uplink/* ${DESTDIR}/include/uplink
+-	install -m 644 .build/libuplink.pc ${DESTDIR}/lib/pkgconfig
++		${DESTDIR}${PREFIX}/include/uplink \
++		${DESTDIR}${LIBDIR}/pkgconfig
++	install .build/libuplink.so ${DESTDIR}${LIBDIR}
++	install .build/libuplink.a ${DESTDIR}${LIBDIR}
++	install -m 644 .build/uplink/* ${DESTDIR}${PREFIX}/include/uplink
++	install -m 644 .build/libuplink.pc ${DESTDIR}${LIBDIR}/pkgconfig
