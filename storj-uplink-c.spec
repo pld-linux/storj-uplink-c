@@ -49,7 +49,7 @@ Statyczna biblioteka Storj uplink.
 
 %prep
 %setup -q -n uplink-c-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 cat > scripts/version <<EOF
 #!/bin/sh
